@@ -16,11 +16,13 @@ export function MarketingPageShell({
   sectionClassName = "pb-16",
 }: MarketingPageShellProps) {
   return (
-    <main className="relative isolate overflow-hidden">
-      <MarketingBackdrop />
+    <main className="relative isolate">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <MarketingBackdrop />
+      </div>
 
       <section
-        className={`mx-auto flex min-h-screen w-full max-w-7xl flex-col px-4 pt-4 sm:px-8 lg:px-10 ${sectionClassName}`}
+        className={`relative z-10 mx-auto flex min-h-screen w-full max-w-7xl flex-col px-4 pt-4 sm:px-8 lg:px-10 ${sectionClassName}`}
       >
         <SiteHeader ctaHref={headerCtaHref} ctaLabel={headerCtaLabel} />
         {children}

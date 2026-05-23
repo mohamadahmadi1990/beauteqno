@@ -35,7 +35,7 @@ export const siteConfig = {
 
 export const homeContent = {
   hero: {
-    badge: "Toronto launch presentation",
+    badge: "",
     title: "AI-Powered",
     accentTitle: "Beauty Solutions",
     description:

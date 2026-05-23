@@ -135,6 +135,38 @@
       radial-gradient(circle at 48% 100%, rgba(205, 174, 164, 0.06), transparent 32%);
   }
 
+  .page-ai-field {
+    background:
+      radial-gradient(circle at 24% 24%, rgba(150, 226, 255, 0.1), transparent 18%),
+      radial-gradient(circle at 68% 18%, rgba(168, 199, 255, 0.08), transparent 16%),
+      radial-gradient(circle at 42% 76%, rgba(255, 210, 226, 0.06), transparent 18%),
+      repeating-radial-gradient(
+        circle at 26% 36%,
+        rgba(133, 224, 255, 0.05) 0 1px,
+        transparent 1px 18px
+      ),
+      repeating-radial-gradient(
+        circle at 72% 40%,
+        rgba(246, 228, 218, 0.035) 0 1px,
+        transparent 1px 22px
+      );
+    mask-image: radial-gradient(circle at center, black 12%, transparent 88%);
+    animation: ai-field-drift 24s ease-in-out infinite alternate;
+    will-change: transform, opacity;
+  }
+
+  .page-signal-traces {
+    background-image:
+      linear-gradient(122deg, transparent 12%, rgba(151, 226, 255, 0.04) 12.08%, transparent 12.18%),
+      linear-gradient(122deg, transparent 28%, rgba(151, 226, 255, 0.026) 28.08%, transparent 28.18%),
+      linear-gradient(122deg, transparent 48%, rgba(255, 226, 213, 0.028) 48.08%, transparent 48.18%),
+      linear-gradient(122deg, transparent 66%, rgba(170, 198, 255, 0.03) 66.08%, transparent 66.18%),
+      linear-gradient(0deg, transparent 18%, rgba(151, 226, 255, 0.028) 18.08%, transparent 18.18%),
+      linear-gradient(0deg, transparent 72%, rgba(255, 226, 213, 0.02) 72.08%, transparent 72.18%);
+    animation: signal-trace-shift 28s ease-in-out infinite alternate;
+    will-change: transform, opacity;
+  }
+
   .page-circuit {
     background-image:
       radial-gradient(circle at 14% 26%, rgba(240, 224, 214, 0.12) 0 0.75px, transparent 1.05px),
@@ -160,6 +192,118 @@
     mask-image: radial-gradient(circle at center, black 18%, transparent 88%);
     animation: circuit-pulse 20s ease-in-out infinite;
     will-change: opacity, transform;
+  }
+
+  .page-orbit-rings {
+    background:
+      radial-gradient(circle at 24% 40%, transparent 0 10.6rem, rgba(141, 224, 255, 0.065) 10.72rem, transparent 10.88rem),
+      radial-gradient(circle at 24% 40%, transparent 0 14.4rem, rgba(141, 224, 255, 0.036) 14.5rem, transparent 14.64rem),
+      radial-gradient(circle at 74% 42%, transparent 0 11.6rem, rgba(168, 199, 255, 0.05) 11.72rem, transparent 11.86rem),
+      radial-gradient(circle at 74% 42%, transparent 0 16rem, rgba(246, 225, 215, 0.028) 16.1rem, transparent 16.24rem);
+    mask-image: radial-gradient(circle at center, black 18%, transparent 92%);
+    animation: orbit-breathe 26s ease-in-out infinite alternate;
+    will-change: transform, opacity;
+  }
+
+  .page-hero-orbit,
+  .page-hero-orbit-secondary,
+  .page-phone-orbit {
+    pointer-events: none;
+  }
+
+  .page-connection-line {
+    position: absolute;
+    z-index: -20;
+    overflow: hidden;
+    border-radius: 9999px;
+    pointer-events: none;
+  }
+
+  .page-connection-line::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(146, 226, 255, 0) 0%,
+      rgba(146, 226, 255, 0.12) 18%,
+      rgba(255, 224, 214, 0.08) 54%,
+      rgba(146, 226, 255, 0) 100%
+    );
+    opacity: 0.7;
+  }
+
+  .page-connection-line::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -16%;
+    height: 220%;
+    width: 22%;
+    border-radius: 9999px;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(146, 232, 255, 0.9) 38%,
+      rgba(255, 159, 214, 0.72) 68%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    transform: translateY(-50%);
+    filter: blur(6px);
+    opacity: 0.88;
+  }
+
+  .page-connection-line--hero-to-phone {
+    top: 31%;
+    left: 27%;
+    width: 42%;
+    height: 1px;
+    transform: rotate(-16deg);
+    box-shadow: 0 0 0 1px rgba(146, 226, 255, 0.06);
+  }
+
+  .page-connection-line--hero-to-phone::after {
+    animation: connection-travel-primary 8.6s linear infinite;
+  }
+
+  .page-connection-line--hero-to-phone-secondary {
+    top: 58%;
+    left: 24%;
+    width: 38%;
+    height: 1px;
+    transform: rotate(8deg);
+    box-shadow: 0 0 0 1px rgba(255, 224, 214, 0.045);
+  }
+
+  .page-connection-line--hero-to-phone-secondary::after {
+    animation: connection-travel-secondary 10.4s linear infinite;
+    opacity: 0.72;
+  }
+
+  .page-connection-line--hero-loop {
+    top: 21%;
+    left: 15%;
+    width: 20%;
+    height: 1px;
+    transform: rotate(62deg);
+    box-shadow: 0 0 0 1px rgba(146, 226, 255, 0.05);
+  }
+
+  .page-connection-line--hero-loop::after {
+    animation: connection-travel-tertiary 7.8s linear infinite;
+    opacity: 0.66;
+  }
+
+  .page-hero-orbit {
+    animation: orbit-turn 34s linear infinite;
+  }
+
+  .page-hero-orbit-secondary {
+    animation: orbit-turn-reverse 42s linear infinite;
+  }
+
+  .page-phone-orbit {
+    animation: orbit-drift 30s ease-in-out infinite alternate;
   }
 
   .section-kicker {
@@ -277,6 +421,23 @@
   }
 }
 
+@keyframes ai-field-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.54;
+  }
+
+  50% {
+    transform: translate3d(0.8%, -0.9%, 0) scale(1.02);
+    opacity: 0.74;
+  }
+
+  100% {
+    transform: translate3d(-0.7%, 0.6%, 0) scale(1.015);
+    opacity: 0.6;
+  }
+}
+
 @keyframes halo-drift {
   0% {
     transform: translate3d(0, 0, 0) scale(1);
@@ -294,6 +455,23 @@
   }
 }
 
+@keyframes signal-trace-shift {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.4;
+  }
+
+  50% {
+    transform: translate3d(0.9%, -0.7%, 0);
+    opacity: 0.58;
+  }
+
+  100% {
+    transform: translate3d(-0.6%, 0.4%, 0);
+    opacity: 0.44;
+  }
+}
+
 @keyframes circuit-drift {
   0% {
     transform: translate3d(0, 0, 0) scale(1);
@@ -308,6 +486,112 @@
   100% {
     transform: translate3d(-0.7%, 0.45%, 0) scale(1.012);
     opacity: 0.58;
+  }
+}
+
+@keyframes orbit-breathe {
+  0% {
+    transform: scale(1);
+    opacity: 0.34;
+  }
+
+  50% {
+    transform: scale(1.018);
+    opacity: 0.56;
+  }
+
+  100% {
+    transform: scale(1.01);
+    opacity: 0.4;
+  }
+}
+
+@keyframes orbit-turn {
+  0% {
+    transform: rotate(0deg) scale(1);
+    opacity: 0.42;
+  }
+
+  100% {
+    transform: rotate(360deg) scale(1.02);
+    opacity: 0.5;
+  }
+}
+
+@keyframes orbit-turn-reverse {
+  0% {
+    transform: rotate(0deg) scale(1);
+    opacity: 0.28;
+  }
+
+  100% {
+    transform: rotate(-360deg) scale(1.015);
+    opacity: 0.38;
+  }
+}
+
+@keyframes orbit-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.26;
+  }
+
+  50% {
+    transform: translate3d(0.8%, -0.8%, 0) scale(1.03);
+    opacity: 0.42;
+  }
+
+  100% {
+    transform: translate3d(-0.6%, 0.5%, 0) scale(1.02);
+    opacity: 0.32;
+  }
+}
+
+@keyframes connection-travel-primary {
+  0% {
+    left: -18%;
+    opacity: 0;
+  }
+
+  12% {
+    opacity: 0.9;
+  }
+
+  100% {
+    left: 102%;
+    opacity: 0;
+  }
+}
+
+@keyframes connection-travel-secondary {
+  0% {
+    left: 102%;
+    opacity: 0;
+  }
+
+  14% {
+    opacity: 0.74;
+  }
+
+  100% {
+    left: -18%;
+    opacity: 0;
+  }
+}
+
+@keyframes connection-travel-tertiary {
+  0% {
+    left: -22%;
+    opacity: 0;
+  }
+
+  16% {
+    opacity: 0.66;
+  }
+
+  100% {
+    left: 104%;
+    opacity: 0;
   }
 }
 
@@ -357,8 +641,15 @@
 @media (prefers-reduced-motion: reduce) {
   .page-gradient-motion,
   .page-gradient-halo,
+  .page-ai-field,
+  .page-signal-traces,
   .page-circuit,
   .page-circuit-secondary,
+  .page-orbit-rings,
+  .page-hero-orbit,
+  .page-hero-orbit-secondary,
+  .page-phone-orbit,
+  .page-connection-line::after,
   .border-trail__path,
   .card-glimmer::after {
     animation: none;

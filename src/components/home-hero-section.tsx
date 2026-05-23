@@ -11,10 +11,12 @@ export function HomeHeroSection() {
     <section className="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-4 pb-10 pt-4 sm:px-8 lg:px-10">
       <div className="grid flex-1 items-center gap-10 py-8 lg:grid-cols-[0.84fr_1.16fr] lg:py-10">
         <div>
-          <Badge className="border-[#f3e6dc]/12 bg-[#f6e8dc]/8 text-[#efe1d5]">
-            <Sparkles className="h-3.5 w-3.5" />
-            {hero.badge}
-          </Badge>
+          {hero.badge ? (
+            <Badge className="border-[#f3e6dc]/12 bg-[#f6e8dc]/8 text-[#efe1d5]">
+              <Sparkles className="h-3.5 w-3.5" />
+              {hero.badge}
+            </Badge>
+          ) : null}
 
           <h1 className="editorial-heading mt-6 max-w-3xl font-heading text-4xl text-[#f7efe8] sm:text-5xl lg:text-[4.4rem]">
             {hero.title}
