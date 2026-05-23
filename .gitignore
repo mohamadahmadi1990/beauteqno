@@ -1,0 +1,10 @@
+.next
+node_modules
+.env.local
+dist
+build
+out
+
+next-dev.stdout.log
+next-dev.stderr.log
+

@@ -1,0 +1,246 @@
+"use client";
+
+import { LazyMotion, domAnimation, m, useReducedMotion } from "motion/react";
+import { ArrowUpRight, Sparkles, Waves } from "lucide-react";
+
+const floatTransition = {
+  duration: 4.8,
+  repeat: Number.POSITIVE_INFINITY,
+  repeatType: "mirror" as const,
+  ease: "easeInOut" as const,
+};
+
+export function HeroProductScene() {
+  const reduceMotion = useReducedMotion();
+
+  return (
+    <LazyMotion features={domAnimation}>
+      <div className="relative mx-auto flex w-full max-w-[40rem] items-center justify-center py-4 lg:py-0">
+        <m.div
+          animate={
+            reduceMotion ? undefined : { scale: [1, 1.05, 1], opacity: [0.48, 0.66, 0.48] }
+          }
+          transition={
+            reduceMotion
+              ? undefined
+              : { duration: 11, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }
+          }
+          className="absolute left-10 top-10 h-28 w-28 rounded-full bg-[#e9cdbf]/18 blur-3xl"
+        />
+        <m.div
+          animate={
+            reduceMotion ? undefined : { scale: [1, 1.12, 1], opacity: [0.28, 0.46, 0.28] }
+          }
+          transition={
+            reduceMotion
+              ? undefined
+              : {
+                  duration: 12,
+                  repeat: Number.POSITIVE_INFINITY,
+                  ease: "easeInOut",
+                  delay: 1.2,
+                }
+          }
+          className="absolute bottom-10 right-8 h-36 w-36 rounded-full bg-[#b7cbe6]/16 blur-3xl"
+        />
+
+        <div className="relative grid w-full items-center gap-5 lg:grid-cols-[0.98fr_0.9fr]">
+          <m.div
+            initial={{ opacity: 0, x: -24 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="relative flex items-center justify-center"
+          >
+            <m.div
+              animate={reduceMotion ? undefined : { y: [-6, 8, -6], rotate: [-2, 1, -2] }}
+              transition={reduceMotion ? undefined : floatTransition}
+              className="absolute left-[14%] top-[11%] z-20 rounded-full border border-white/14 bg-white/10 px-3.5 py-2 backdrop-blur-xl"
+            >
+              <div className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.24em] text-[#f3e8df]">
+                <Sparkles className="h-3.5 w-3.5" />
+                AI pulse
+              </div>
+            </m.div>
+
+            <m.div
+              animate={reduceMotion ? undefined : { y: [6, -8, 6], x: [0, 3, 0] }}
+              transition={
+                reduceMotion ? undefined : { ...floatTransition, duration: 6.6 }
+              }
+              className="absolute bottom-[10%] right-[6%] z-20 rounded-[1.25rem] border border-white/12 bg-[#1a1320]/85 px-4 py-3 backdrop-blur-xl"
+            >
+              <p className="text-[10px] uppercase tracking-[0.28em] text-[#f2e8e1]/40">Routine</p>
+              <div className="mt-2 flex items-center gap-2 text-sm text-[#f6eee8]">
+                Glow repair
+                <ArrowUpRight className="h-4 w-4 text-[#d7e1ef]" />
+              </div>
+            </m.div>
+
+            <m.div
+              initial={{ opacity: 0, scale: 0.92 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.9, ease: "easeOut", delay: 0.12 }}
+              className="mask-device relative h-[21.5rem] w-[17rem] lg:h-[23rem] lg:w-[18rem]"
+            >
+              <m.div
+                animate={reduceMotion ? undefined : { rotate: [0, 3, 0, -3, 0] }}
+                transition={
+                  reduceMotion
+                    ? undefined
+                    : { duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }
+                }
+                className="absolute inset-0"
+              >
+              <svg viewBox="0 0 320 420" className="h-full w-full drop-shadow-[0_24px_80px_rgba(80,231,255,0.22)]">
+                <defs>
+                  <linearGradient id="maskBase" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="rgba(248,239,232,0.96)" />
+                    <stop offset="44%" stopColor="rgba(232,203,188,0.85)" />
+                    <stop offset="100%" stopColor="rgba(183,200,226,0.78)" />
+                  </linearGradient>
+                  <linearGradient id="maskInner" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stopColor="rgba(255,250,246,0.95)" />
+                    <stop offset="100%" stopColor="rgba(255,240,232,0.1)" />
+                  </linearGradient>
+                </defs>
+                <path
+                  d="M160 26c60 0 110 40 126 100 12 45 0 110-30 166-16 31-40 58-70 79-10 7-22 11-26 11s-16-4-26-11c-30-21-54-48-70-79-30-56-42-121-30-166C50 66 100 26 160 26Z"
+                  fill="url(#maskBase)"
+                  stroke="rgba(255,247,241,0.48)"
+                  strokeWidth="2"
+                />
+                <path
+                  d="M160 52c47 0 88 30 102 77 10 35 0 91-24 139-12 23-31 45-54 63-8 6-18 9-24 9s-16-3-24-9c-23-18-42-40-54-63-24-48-34-104-24-139 14-47 55-77 102-77Z"
+                  fill="url(#maskInner)"
+                  opacity="0.68"
+                />
+                <ellipse cx="111" cy="164" rx="27" ry="20" fill="#08111f" opacity="0.88" />
+                <ellipse cx="209" cy="164" rx="27" ry="20" fill="#08111f" opacity="0.88" />
+                <path
+                  d="M112 235c16 16 37 24 48 24s32-8 48-24"
+                  fill="none"
+                  stroke="#0d1830"
+                  strokeWidth="12"
+                  strokeLinecap="round"
+                  opacity="0.78"
+                />
+                <path
+                  d="M126 106c12-11 23-16 34-16s22 5 34 16"
+                  fill="none"
+                  stroke="rgba(252,244,236,0.72)"
+                  strokeWidth="6"
+                  strokeLinecap="round"
+                  opacity="0.75"
+                />
+              </svg>
+              </m.div>
+
+              <m.div
+                animate={
+                  reduceMotion ? undefined : { opacity: [0.2, 0.7, 0.2], scale: [0.96, 1.04, 0.96] }
+                }
+                transition={
+                  reduceMotion
+                    ? undefined
+                    : {
+                        duration: 6.8,
+                        repeat: Number.POSITIVE_INFINITY,
+                        ease: "easeInOut",
+                      }
+                }
+                className="absolute left-1/2 top-[46%] h-44 w-44 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#efddcf]/20 bg-[#ead0bf]/8 blur-xl lg:h-52 lg:w-52"
+              />
+            </m.div>
+          </m.div>
+
+          <m.div
+            initial={{ opacity: 0, x: 24 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.85, ease: "easeOut", delay: 0.08 }}
+            className="relative"
+          >
+            <m.div
+              animate={reduceMotion ? undefined : { y: [-8, 6, -8] }}
+              transition={
+                reduceMotion ? undefined : { ...floatTransition, duration: 6.8 }
+              }
+              className="phone-shell relative mx-auto h-[26rem] w-[14rem] rounded-[2.5rem] border border-white/12 bg-[#110d14]/92 p-3 shadow-[0_30px_100px_rgba(0,0,0,0.45)] lg:h-[28rem] lg:w-[15rem]"
+            >
+            <div className="absolute left-1/2 top-2.5 h-1.5 w-20 -translate-x-1/2 rounded-full bg-white/12" />
+            <div className="relative h-full overflow-hidden rounded-[2rem] border border-white/10 bg-[radial-gradient(circle_at_top,#2d2030_0%,#17111d_45%,#0c0910_100%)] p-4 lg:p-5">
+              <m.div
+                animate={reduceMotion ? undefined : { x: ["-30%", "120%"] }}
+                transition={
+                  reduceMotion
+                    ? undefined
+                    : { duration: 7.2, repeat: Number.POSITIVE_INFINITY, ease: "linear" }
+                }
+                className="absolute inset-y-0 w-24 rotate-[18deg] bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.14),transparent)]"
+              />
+
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-[10px] uppercase tracking-[0.28em] text-[#efe3d9]/52">
+                    Beauteqno app
+                  </p>
+                  <h3 className="mt-2 text-lg font-semibold text-[#f7f0ea] lg:text-xl">Daily AI ritual</h3>
+                </div>
+                <div className="rounded-full border border-white/12 bg-white/10 px-3 py-1 text-[10px] uppercase tracking-[0.26em] text-[#efe4dc]/70">
+                  Live sync
+                </div>
+              </div>
+
+              <div className="mt-5 rounded-[1.5rem] border border-white/10 bg-white/8 p-4 backdrop-blur-xl">
+                <div className="flex items-center justify-between text-sm text-[#f1e7df]/74">
+                  <span>Device calibration</span>
+                  <span className="text-[#d7e1ef]">92%</span>
+                </div>
+                <div className="mt-3 h-2 overflow-hidden rounded-full bg-white/10">
+                  <m.div
+                    initial={{ width: "0%" }}
+                    animate={reduceMotion ? { width: "92%" } : { width: ["24%", "92%", "68%", "92%"] }}
+                    transition={
+                      reduceMotion
+                        ? { duration: 0.45, ease: "easeOut" }
+                        : { duration: 9, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }
+                    }
+                    className="h-full rounded-full bg-[linear-gradient(90deg,#edd7c8,#ddc6bb,#b7cbe6)]"
+                  />
+                </div>
+                <div className="mt-4 flex items-center gap-3 rounded-[1.2rem] bg-[#130f15]/76 p-3">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#edd8ca]/14 text-[#efe1d6]">
+                    <Waves className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.22em] text-[#f2e9e1]/40">Tonight</p>
+                    <p className="mt-1 text-sm text-[#f6eee8]">Hydro lift sculpt mask</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-4 grid gap-3">
+                {[
+                  ["Skin calm score", "Improved 18% this week"],
+                  ["Routine suggestion", "LED + serum pairing recommended"],
+                  ["Next follow-up", "AI review after 3 sessions"],
+                ].map(([title, value], index) => (
+                  <m.div
+                    key={title}
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.55, delay: 0.25 + index * 0.12 }}
+                    className="rounded-[1.35rem] border border-white/10 bg-white/7 p-4"
+                  >
+                    <p className="text-[10px] uppercase tracking-[0.24em] text-[#f2e8df]/42">{title}</p>
+                    <p className="mt-2 text-sm leading-6 text-[#f6eee8]/88">{value}</p>
+                  </m.div>
+                ))}
+              </div>
+            </div>
+            </m.div>
+          </m.div>
+        </div>
+      </div>
+    </LazyMotion>
+  );
+}
