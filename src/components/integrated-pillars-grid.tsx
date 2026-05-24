@@ -1,14 +1,8 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
-import {
-  BrainCircuit,
-  Cpu,
-  DatabaseZap,
-  ShieldCheck,
-  type LucideIcon,
-} from "lucide-react";
 import { Card } from "@/components/ui/card";
+import { homeContent, type IconContent } from "@/content/site";
 
 type BorderMetrics = {
   width: number;
@@ -16,39 +10,13 @@ type BorderMetrics = {
   radius: number;
 };
 
-const pillars = [
-  {
-    title: "Connected beauty hardware",
-    description:
-      "Elegant treatment devices become part of one intelligent platform instead of stand-alone moments.",
-    icon: Cpu,
-  },
-  {
-    title: "Personalization engine",
-    description:
-      "AI tunes routines, recovery cadence, and device recommendations around each user's profile.",
-    icon: BrainCircuit,
-  },
-  {
-    title: "Operator-ready SaaS",
-    description:
-      "Studios and partners get a clear software layer for consultations, follow-up, and retention.",
-    icon: DatabaseZap,
-  },
-  {
-    title: "Premium trust cues",
-    description:
-      "A controlled visual system and calm motion language make the product feel credible from the first second.",
-    icon: ShieldCheck,
-  },
-];
-
-export function ProductArchitectureGrid() {
+export function IntegratedPillarsGrid() {
   return (
     <div className="mt-12 grid gap-5 lg:grid-cols-2 xl:grid-cols-4">
-      {pillars.map(({ title, description, icon }) => (
+      {homeContent.integratedPillars.pillars.map(({ title, description, icon }, index) => (
         <ProductArchitectureCard
           key={title}
+          index={index + 1}
           title={title}
           description={description}
           icon={icon}
@@ -59,13 +27,15 @@ export function ProductArchitectureGrid() {
 }
 
 function ProductArchitectureCard({
+  index,
   title,
   description,
   icon: Icon,
 }: {
+  index: number;
   title: string;
   description: string;
-  icon: LucideIcon;
+  icon: IconContent["icon"];
 }) {
   const gradientId = useId().replace(/:/g, "");
   const cardRef = useRef<HTMLDivElement | null>(null);
@@ -106,7 +76,10 @@ function ProductArchitectureCard({
   const strokeWidth = 0.31;
 
   return (
-    <Card ref={cardRef} className="card-glimmer group relative overflow-hidden border-transparent p-6">
+    <Card
+      ref={cardRef}
+      className="card-glimmer group relative overflow-hidden border-transparent p-6"
+    >
       <div
         className="pointer-events-none absolute inset-0 border border-white/10"
         style={{ borderRadius: "inherit" }}
@@ -166,8 +139,13 @@ function ProductArchitectureCard({
       ) : null}
 
       <div className="relative z-10">
-        <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/7 text-[#efe1d5]">
-          <Icon className="h-5 w-5" />
+        <div className="flex items-start justify-between gap-4">
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#c9a35d]/35 bg-[#c9a35d]/6 text-[#f0d7ae]">
+            <Icon className="h-5 w-5" />
+          </div>
+          <span className="font-heading text-5xl leading-none text-[#6d5835]/34">
+            {String(index).padStart(2, "0")}
+          </span>
         </div>
         <h3 className="mt-6 font-heading text-xl font-medium text-[#f7efe8]">
           {title}

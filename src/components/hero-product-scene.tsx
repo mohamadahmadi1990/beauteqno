@@ -2,13 +2,20 @@
 
 import { LazyMotion, domAnimation, m, useReducedMotion } from "motion/react";
 import { ArrowUpRight, Sparkles, Waves } from "lucide-react";
+import { MaskDeviceArt } from "@/components/mask-device-art";
 
-const floatTransition = {
+const FLOAT_TRANSITION = {
   duration: 4.8,
   repeat: Number.POSITIVE_INFINITY,
   repeatType: "mirror" as const,
   ease: "easeInOut" as const,
 };
+
+const PHONE_INSIGHTS = [
+  ["Skin calm score", "Improved 18% this week"],
+  ["Routine suggestion", "LED + serum pairing recommended"],
+  ["Next follow-up", "AI review after 3 sessions"],
+] as const;
 
 export function HeroProductScene() {
   const reduceMotion = useReducedMotion();
@@ -53,7 +60,7 @@ export function HeroProductScene() {
           >
             <m.div
               animate={reduceMotion ? undefined : { y: [-6, 8, -6], rotate: [-2, 1, -2] }}
-              transition={reduceMotion ? undefined : floatTransition}
+              transition={reduceMotion ? undefined : FLOAT_TRANSITION}
               className="absolute left-[14%] top-[11%] z-20 rounded-full border border-white/14 bg-white/10 px-3.5 py-2 backdrop-blur-xl"
             >
               <div className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.24em] text-[#f3e8df]">
@@ -64,7 +71,7 @@ export function HeroProductScene() {
 
             <m.div
               animate={reduceMotion ? undefined : { y: [6, -8, 6], x: [0, 3, 0] }}
-              transition={reduceMotion ? undefined : { ...floatTransition, duration: 6.6 }}
+              transition={reduceMotion ? undefined : { ...FLOAT_TRANSITION, duration: 6.6 }}
               className="absolute bottom-[10%] right-[6%] z-20 rounded-[1.25rem] border border-white/12 bg-[#1a1320]/85 px-4 py-3 backdrop-blur-xl"
             >
               <p className="text-[10px] uppercase tracking-[0.28em] text-[#f2e8e1]/40">Routine</p>
@@ -89,100 +96,7 @@ export function HeroProductScene() {
                 }
                 className="absolute inset-0"
               >
-                <svg
-                  viewBox="0 0 900 900"
-                  className="h-full w-full drop-shadow-[0_22px_38px_rgba(0,0,0,0.14)]"
-                >
-                  <defs>
-                    <radialGradient id="silverMaskBody" cx="50%" cy="34%" r="74%">
-                      <stop offset="0%" stopColor="#dfdbd8" />
-                      <stop offset="36%" stopColor="#cbc6c4" />
-                      <stop offset="74%" stopColor="#aaa5a9" />
-                      <stop offset="100%" stopColor="#928d92" />
-                    </radialGradient>
-                    <linearGradient
-                      id="silverMaskShade"
-                      x1="148"
-                      y1="116"
-                      x2="738"
-                      y2="804"
-                      gradientUnits="userSpaceOnUse"
-                    >
-                      <stop offset="0%" stopColor="#ffffff" stopOpacity="0.28" />
-                      <stop offset="28%" stopColor="#ffffff" stopOpacity="0.09" />
-                      <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
-                    </linearGradient>
-                    <linearGradient
-                      id="silverSideHighlight"
-                      x1="170"
-                      y1="160"
-                      x2="380"
-                      y2="760"
-                      gradientUnits="userSpaceOnUse"
-                    >
-                      <stop offset="0%" stopColor="#ffffff" stopOpacity="0.16" />
-                      <stop offset="100%" stopColor="#ffffff" stopOpacity="0.02" />
-                    </linearGradient>
-                    <radialGradient id="goldGlow" cx="50%" cy="50%" r="60%">
-                      <stop offset="0%" stopColor="#ffd985" stopOpacity="0.3" />
-                      <stop offset="100%" stopColor="#ffd985" stopOpacity="0" />
-                    </radialGradient>
-                    <mask id="faceCutouts">
-                      <rect width="900" height="900" fill="white" />
-                      <path
-                        d="M150 360C185 326 248 316 299 325C342 333 372 353 387 382C347 393 287 396 235 388C193 381 165 372 150 360Z"
-                        fill="black"
-                      />
-                      <path
-                        d="M750 360C715 326 652 316 601 325C558 333 528 353 513 382C553 393 613 396 665 388C707 381 735 372 750 360Z"
-                        fill="black"
-                      />
-                      <ellipse cx="450" cy="625" rx="68" ry="15" fill="black" />
-                    </mask>
-                  </defs>
-
-                  <path
-                    d="M450 108C572 108 681 146 737 236C781 307 794 410 786 546C779 662 741 748 675 804C617 854 539 878 450 878C361 878 283 854 225 804C159 748 121 662 114 546C106 410 119 307 163 236C219 146 328 108 450 108Z"
-                    fill="url(#silverMaskBody)"
-                    mask="url(#faceCutouts)"
-                  />
-                  <path
-                    d="M450 108C572 108 681 146 737 236C781 307 794 410 786 546C779 662 741 748 675 804C617 854 539 878 450 878C361 878 283 854 225 804C159 748 121 662 114 546C106 410 119 307 163 236C219 146 328 108 450 108Z"
-                    fill="url(#silverMaskShade)"
-                    mask="url(#faceCutouts)"
-                  />
-
-                  <ellipse
-                    cx="450"
-                    cy="470"
-                    rx="98"
-                    ry="142"
-                    fill="url(#goldGlow)"
-                    opacity="0.26"
-                    mask="url(#faceCutouts)"
-                  />
-                  <path
-                    d="M425 360L404 543"
-                    stroke="#ffd36d"
-                    strokeWidth="8"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M475 360L496 543"
-                    stroke="#ffd36d"
-                    strokeWidth="8"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-
-
-                  <g stroke="#ffffff" strokeOpacity="0.72" strokeWidth="4" strokeLinecap="round">
-                    <path d="M710 702C738 626 761 562 782 493" />
-                    <path d="M680 730C710 657 735 595 757 531" />
-                    <path d="M648 752C681 684 708 626 732 570" />
-                  </g>
-                </svg>
+                <MaskDeviceArt />
               </m.div>
 
               <m.div
@@ -211,7 +125,7 @@ export function HeroProductScene() {
           >
             <m.div
               animate={reduceMotion ? undefined : { y: [-8, 6, -8] }}
-              transition={reduceMotion ? undefined : { ...floatTransition, duration: 6.8 }}
+              transition={reduceMotion ? undefined : { ...FLOAT_TRANSITION, duration: 6.8 }}
               className="phone-shell relative mx-auto h-[26rem] w-[14rem] rounded-[2.5rem] border border-white/12 bg-[#110d14]/92 p-3 shadow-[0_30px_100px_rgba(0,0,0,0.45)] lg:h-[28rem] lg:w-[15rem]"
             >
               <div className="absolute left-1/2 top-2.5 h-1.5 w-20 -translate-x-1/2 rounded-full bg-white/12" />
@@ -271,11 +185,7 @@ export function HeroProductScene() {
                 </div>
 
                 <div className="mt-4 grid gap-3">
-                  {[
-                    ["Skin calm score", "Improved 18% this week"],
-                    ["Routine suggestion", "LED + serum pairing recommended"],
-                    ["Next follow-up", "AI review after 3 sessions"],
-                  ].map(([title, value], index) => (
+                  {PHONE_INSIGHTS.map(([title, value], index) => (
                     <m.div
                       key={title}
                       initial={{ opacity: 0, y: 16 }}

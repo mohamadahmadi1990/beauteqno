@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <MarketingPageShell headerCtaHref="/#waitlist" headerCtaLabel="Home demo form">
+    <MarketingPageShell headerCtaHref="/#waitlist" headerCtaLabel="Request access">
       <div className="mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center py-12">
         <Badge className="w-fit border-[#f3e6dc]/12 bg-[#f6e8dc]/8 text-[#efe1d5]">
           <Sparkles className="h-3.5 w-3.5" />

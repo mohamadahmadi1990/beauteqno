@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState } from "react";
+import { type InputHTMLAttributes, useActionState } from "react";
 import { useFormStatus } from "react-dom";
 import {
   initialJoinWaitlistState,
@@ -11,10 +11,10 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
-const interests = [
-  "Investor / partner",
+const INTEREST_OPTIONS = [
+  "Strategic investor",
   "Beauty studio / clinic",
-  "Press / event intro",
+  "Brand / distribution partner",
   "Early access customer",
 ];
 
@@ -28,12 +28,12 @@ export function BeauteqnoWaitlistForm() {
     <Card className="p-7 sm:p-9">
       <div className="flex items-center justify-between gap-4">
         <div>
-          <p className="section-kicker">Lead capture</p>
+          <p className="section-kicker">Access request</p>
           <h3 className="mt-4 font-heading text-3xl font-semibold text-white">
-            Request a demo or join the waitlist
+            Request access or start a partnership conversation
           </h3>
         </div>
-        <Badge className="hidden sm:flex">Neon-ready</Badge>
+        <Badge className="hidden sm:flex">Beauteqno</Badge>
       </div>
 
       <form action={formAction} className="mt-8 space-y-5">
@@ -70,12 +70,12 @@ export function BeauteqnoWaitlistForm() {
               name="interest"
               required
               defaultValue=""
-              className={inputClassName}
+              className={INPUT_CLASS_NAME}
             >
               <option value="" disabled>
                 Select one
               </option>
-              {interests.map((interest) => (
+              {INTEREST_OPTIONS.map((interest) => (
                 <option key={interest} value={interest} className="bg-slate-950">
                   {interest}
                 </option>
@@ -91,7 +91,7 @@ export function BeauteqnoWaitlistForm() {
             name="notes"
             rows={4}
             placeholder="Tell us what kind of partnership, product interest, or intro you have in mind."
-            className={cn(inputClassName, "min-h-32 resize-y py-3")}
+            className={cn(INPUT_CLASS_NAME, "min-h-32 resize-y py-3")}
           />
         </label>
 
@@ -104,7 +104,7 @@ export function BeauteqnoWaitlistForm() {
             )}
           >
             {state.message ??
-              "Submissions store in Neon once DATABASE_URL is connected."}
+              "Tell us where you fit in the ecosystem and we will follow up with the right next step."}
           </div>
           <SubmitButton />
         </div>
@@ -117,11 +117,11 @@ function Field({
   id,
   label,
   ...props
-}: React.InputHTMLAttributes<HTMLInputElement> & { label: string }) {
+}: InputHTMLAttributes<HTMLInputElement> & { label: string }) {
   return (
     <label className="space-y-2 text-sm text-white/78" htmlFor={id}>
       <span className="font-medium">{label}</span>
-      <input id={id} className={inputClassName} {...props} />
+      <input id={id} className={INPUT_CLASS_NAME} {...props} />
     </label>
   );
 }
@@ -136,5 +136,5 @@ function SubmitButton() {
   );
 }
 
-const inputClassName =
+const INPUT_CLASS_NAME =
   "w-full rounded-2xl border border-white/10 bg-white/6 px-4 py-3 text-sm text-white outline-none transition placeholder:text-white/32 focus:border-cyan-200/45 focus:ring-3 focus:ring-cyan-200/14";

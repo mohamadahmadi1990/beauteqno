@@ -22,7 +22,7 @@ export function MarketingPageShell({
       </div>
 
       <section
-        className={`relative z-10 mx-auto flex min-h-screen w-full max-w-7xl flex-col px-4 pt-4 sm:px-8 lg:px-10 ${sectionClassName}`}
+        className={`relative z-10 mx-auto flex min-h-screen w-full max-w-7xl flex-col px-4 pt-10 sm:px-8 lg:px-10 ${sectionClassName}`}
       >
         <SiteHeader ctaHref={headerCtaHref} ctaLabel={headerCtaLabel} />
         {children}

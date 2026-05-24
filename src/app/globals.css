@@ -50,8 +50,8 @@
   --input: rgba(255, 244, 236, 0.05);
   --ring: rgba(234, 214, 197, 0.24);
   --radius: 1.2rem;
-  --font-sans-stack: "Inter", "Segoe UI Variable Text", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-  --font-heading-stack: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", "Times New Roman", serif;
+  --font-sans-stack: var(--font-body), "Segoe UI Variable Text", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-heading-stack: var(--font-heading), "Times New Roman", serif;
   --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
 }
 
@@ -73,7 +73,7 @@
       linear-gradient(180deg, #0a0710 0%, #0c0810 40%, #08060b 100%);
     min-height: 100vh;
     text-rendering: optimizeLegibility;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.015em;
   }
 
   ::selection {
@@ -310,19 +310,20 @@
     color: rgba(228, 214, 203, 0.82);
     font-size: 0.76rem;
     font-weight: 600;
-    letter-spacing: 0.24em;
+    letter-spacing: 0.28em;
     text-transform: uppercase;
   }
 
   .editorial-heading {
     font-weight: 500;
-    letter-spacing: -0.055em;
-    line-height: 0.94;
+    letter-spacing: -0.045em;
+    line-height: 0.92;
     text-wrap: balance;
   }
 
   .luxury-text {
     color: rgba(246, 238, 232, 0.72);
+    letter-spacing: -0.01em;
   }
 
   .border-trail {
