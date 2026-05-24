@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowRight } from "lucide-react";
@@ -21,9 +22,15 @@ export function SiteHeader({
     <header className="sticky top-4 z-40 flex items-center justify-between rounded-[1.75rem] border border-white/10 bg-[linear-gradient(180deg,rgba(12,9,16,0.52),rgba(12,9,16,0.24))] px-4 py-3.5 backdrop-blur-xl sm:px-5 lg:px-6">
       <Link href="/" className="min-w-0">
         <div className="flex items-center gap-3">
-          <div className="relative flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-[linear-gradient(155deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
-            <div className="h-4 w-4 rounded-full bg-[radial-gradient(circle_at_30%_30%,#fff7f3_0%,#edd7c9_34%,#95dff9_100%)] opacity-95" />
-            <div className="absolute h-7 w-7 rounded-full border border-[#9bdcf6]/20" />
+          <div className="relative flex h-16 w-16 items-center justify-center">
+            <Image
+              src="/logo.svg"
+              alt="Beauteqno logo"
+              width={64}
+              height={64}
+              className="h-14 w-14 object-contain opacity-100 brightness-[5.2] contrast-[0.7] saturate-0 invert"
+              priority
+            />
           </div>
           <div className="min-w-0">
             <p className="font-heading text-[1.02rem] font-medium tracking-[0.26em] text-[#f7eee7]">
