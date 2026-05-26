@@ -108,6 +108,7 @@ type ContactContent = {
   badge: string;
   title: string;
   description: string;
+  phoneNumber: string;
   reasons: readonly IconContent[];
 };
 
@@ -421,5 +422,6 @@ export const contactContent = {
   title: "Start a conversation about early access, clinics, or strategic growth.",
   description:
     "If you want to explore Beauteqno as a clinic partner, strategic collaborator, investor, operator, or early user, this is the place to begin.",
+  phoneNumber: "4169937755",
   reasons: contactReasons,
 } satisfies ContactContent;

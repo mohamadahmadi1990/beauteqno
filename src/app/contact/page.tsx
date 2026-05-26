@@ -31,6 +31,16 @@ export default function ContactPage() {
               </p>
             </div>
 
+            <Card className="p-6">
+              <p className="section-kicker">Phone</p>
+              <a
+                href={`tel:${contactContent.phoneNumber}`}
+                className="mt-4 inline-block font-heading text-3xl text-[#f7efe8] transition hover:text-[#efe1d5]"
+              >
+                {contactContent.phoneNumber}
+              </a>
+            </Card>
+
             <div className="grid gap-4">
               {contactContent.reasons.map(({ title, description, icon: Icon }) => (
                 <Card key={title} className="p-6">

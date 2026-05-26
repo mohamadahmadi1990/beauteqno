@@ -3,14 +3,11 @@
 import { revalidatePath } from "next/cache";
 import { getDb, hasDatabaseUrl } from "@/db/client";
 import { waitlistLeads } from "@/db/schema";
+import { hasEmailTransportConfig, sendLeadNotificationEmail } from "@/lib/email";
 
 export type JoinWaitlistState = {
   status: "idle" | "success" | "error";
   message?: string;
-};
-
-export const initialJoinWaitlistState: JoinWaitlistState = {
-  status: "idle",
 };
 
 export async function joinWaitlistAction(
@@ -37,31 +34,85 @@ export async function joinWaitlistAction(
     };
   }
 
-  if (!hasDatabaseUrl()) {
+  const payload = {
+    fullName,
+    email,
+    company,
+    interest,
+    notes,
+  };
+  const emailConfigured = hasEmailTransportConfig();
+  const databaseConfigured = hasDatabaseUrl();
+
+  if (!emailConfigured && !databaseConfigured) {
     return {
       status: "success",
       message:
-        "The form is wired up. Add your Neon DATABASE_URL in .env.local, run db:push, and future submissions will store in PostgreSQL.",
+        "The form is wired up. Add GMAIL_APP_PASSWORD to email beauteqno@gmail.com and DATABASE_URL if you also want submissions stored in Neon.",
     };
   }
 
-  await getDb().insert(waitlistLeads).values({
-    fullName,
-    email,
-    company: company || null,
-    interest,
-    notes: notes || null,
-  });
+  let emailSent = false;
+  let leadStored = false;
 
-  revalidatePath("/");
+  if (emailConfigured) {
+    try {
+      await sendLeadNotificationEmail(payload);
+      emailSent = true;
+    } catch (error) {
+      console.error("Failed to send Beauteqno contact email:", error);
+    }
+  }
+
+  if (databaseConfigured) {
+    try {
+      await getDb().insert(waitlistLeads).values({
+        fullName,
+        email,
+        company: company || null,
+        interest,
+        notes: notes || null,
+      });
+      leadStored = true;
+      revalidatePath("/");
+    } catch (error) {
+      console.error("Failed to store Beauteqno lead in Neon:", error);
+    }
+  }
+
+  if (emailSent || leadStored) {
+    return {
+      status: "success",
+      message: buildSuccessMessage({ emailSent, leadStored }),
+    };
+  }
 
   return {
-    status: "success",
-    message: "Thanks. Your Beauteqno request has been captured.",
+    status: "error",
+    message:
+      "We could not deliver your request right now. Please check the email and database configuration and try again.",
   };
 }
 
 function getText(formData: FormData, key: string) {
   const value = formData.get(key);
   return typeof value === "string" ? value.trim() : "";
+}
+
+function buildSuccessMessage({
+  emailSent,
+  leadStored,
+}: {
+  emailSent: boolean;
+  leadStored: boolean;
+}) {
+  if (emailSent && leadStored) {
+    return "Your request has been received. Our team will review it and follow up shortly.";
+  }
+
+  if (emailSent) {
+    return "Your request has been received and delivered to our team successfully.";
+  }
+
+  return "Your request has been received and recorded successfully.";
 }

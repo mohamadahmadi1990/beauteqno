@@ -2,10 +2,8 @@
 
 import { type InputHTMLAttributes, useActionState } from "react";
 import { useFormStatus } from "react-dom";
-import {
-  initialJoinWaitlistState,
-  joinWaitlistAction,
-} from "@/app/actions/join-waitlist";
+import { joinWaitlistAction } from "@/app/actions/join-waitlist";
+import { initialJoinWaitlistState } from "@/app/actions/join-waitlist-state";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
