@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { getDb, hasDatabaseUrl } from "@/db/client";
 import { waitlistLeads } from "@/db/schema";
-import { hasEmailTransportConfig, sendLeadNotificationEmail } from "@/lib/email";
+import { hasEmailTransportConfig, sendLeadEmails } from "@/lib/email";
 
 export type JoinWaitlistState = {
   status: "idle" | "success" | "error";
@@ -48,19 +48,21 @@ export async function joinWaitlistAction(
     return {
       status: "success",
       message:
-        "The form is wired up. Add GMAIL_APP_PASSWORD to email beauteqno@gmail.com and DATABASE_URL if you also want submissions stored in Neon.",
+        "The form is wired up. Add RESEND_API_KEY and RESEND_FROM_EMAIL to send email notifications, and DATABASE_URL if you also want submissions stored in Neon.",
     };
   }
 
-  let emailSent = false;
+  let adminNotificationSent = false;
+  let requesterConfirmationSent = false;
   let leadStored = false;
 
   if (emailConfigured) {
     try {
-      await sendLeadNotificationEmail(payload);
-      emailSent = true;
+      const deliveryResult = await sendLeadEmails(payload);
+      adminNotificationSent = deliveryResult.adminNotificationSent;
+      requesterConfirmationSent = deliveryResult.requesterConfirmationSent;
     } catch (error) {
-      console.error("Failed to send Beauteqno contact email:", error);
+      console.error("Failed to send Beauteqno contact emails:", error);
     }
   }
 
@@ -80,10 +82,14 @@ export async function joinWaitlistAction(
     }
   }
 
-  if (emailSent || leadStored) {
+  if (adminNotificationSent || requesterConfirmationSent || leadStored) {
     return {
       status: "success",
-      message: buildSuccessMessage({ emailSent, leadStored }),
+      message: buildSuccessMessage({
+        adminNotificationSent,
+        requesterConfirmationSent,
+        leadStored,
+      }),
     };
   }
 
@@ -100,19 +106,25 @@ function getText(formData: FormData, key: string) {
 }
 
 function buildSuccessMessage({
-  emailSent,
+  adminNotificationSent,
+  requesterConfirmationSent,
   leadStored,
 }: {
-  emailSent: boolean;
+  adminNotificationSent: boolean;
+  requesterConfirmationSent: boolean;
   leadStored: boolean;
 }) {
-  if (emailSent && leadStored) {
-    return "Your request has been received. Our team will review it and follow up shortly.";
+  if (requesterConfirmationSent && (adminNotificationSent || leadStored)) {
+    return "Your request has been received. A confirmation email is on its way, and our team will follow up shortly.";
   }
 
-  if (emailSent) {
-    return "Your request has been received and delivered to our team successfully.";
+  if (requesterConfirmationSent) {
+    return "Your request has been received, and a confirmation email is on its way.";
   }
 
-  return "Your request has been received and recorded successfully.";
+  if (adminNotificationSent || leadStored) {
+    return "Your request has been received and recorded successfully.";
+  }
+
+  return "Your request has been received.";
 }
